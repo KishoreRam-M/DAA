@@ -1,0 +1,70 @@
+# 🔍 Backtracking vs Branch and Bound — With Pruning Logic
+
+## 📌 What is Branch and Bound?
+
+**Branch and Bound** is a problem-solving technique used to find **optimal solutions** in **combinatorial optimization problems** (like TSP, Knapsack). It explores branches of a **state-space tree** and prunes those that **cannot lead to better results**, improving efficiency.
+
+---
+
+## ✂️ Why is a Search Path Terminated in Branch and Bound?
+
+A search path is **terminated (pruned)** if it **cannot possibly lead to a better solution** than the best one found so far.
+
+### ✅ Reasons for Pruning a Path
+
+| Reason                 | Explanation                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| **1. Infeasibility**   | The partial solution violates problem constraints (e.g., capacity exceeded).  |
+| **2. Bound Exceeded**  | The estimated cost/value is worse than the best known (based on bound check). |
+| **3. Goal Reached**    | A complete solution is already found; this path can’t do better.              |
+| **4. No Options Left** | Further exploration cannot yield improvement.                                 |
+
+### 📌 Example: Subset Sum with Bound
+
+If `current sum = 18` and `target sum = 15`, this branch is **pruned** — it **exceeds** the target.
+
+---
+
+## 🌳 Pruning Diagram (State-Space Tree)
+
+```text
+          Root
+         /    \
+     Valid     > Bound (prune)
+    /   \
+Continue  Infeasible (prune)
+```
+
+---
+
+## 🔄 Backtracking vs Branch and Bound
+
+| Feature               | Backtracking                                 | Branch and Bound                            |
+| --------------------- | -------------------------------------------- | ------------------------------------------- |
+| **Purpose**           | Find **all feasible** or **valid** solutions | Find the **optimal solution**               |
+| **Used For**          | Decision problems (e.g., N-Queens, Sudoku)   | Optimization problems (e.g., TSP, Knapsack) |
+| **Pruning Criteria**  | Infeasible paths (constraint violation)      | Suboptimal paths (worse bound)              |
+| **Search Strategy**   | **Depth-First Search (DFS)**                 | **Breadth-First** or **Best-First Search**  |
+| **Bounding Function** | ❌ Not used                                   | ✅ Used to estimate upper/lower bounds       |
+| **Goal**              | Find valid solution(s)                       | Find the **best** (most optimal) solution   |
+
+---
+
+## 🧠 Example Illustration
+
+### 🔹 Backtracking — Subset Sum
+
+* Explore all subsets.
+* **Prune only** when sum exceeds the target.
+
+### 🔹 Branch and Bound — Knapsack
+
+* Explore item combinations.
+* **Prune paths** that cannot improve the best profit so far (even if still under capacity).
+
+---
+
+## 📝 Summary
+
+* **Backtracking = Feasibility Check** → "Is this a valid solution?"
+* **Branch and Bound = Optimality Check** → "Can this branch yield a better solution?"
